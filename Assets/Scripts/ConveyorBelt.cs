@@ -9,7 +9,7 @@ public class ConveyorBelt : MonoBehaviour
     public float numberSpawnInterval = 2.0f;
     private float timeSinceLastNumber = 0.0f;
 
-    private int maximumSpawnedNumbers = 8;
+    private int maximumSpawnedNumbers = 10;
     private List<int> spawnedNumbers = new List<int>();
 
     private List<CustomerOrder> customerOrders = new List<CustomerOrder>();
@@ -55,93 +55,78 @@ public class ConveyorBelt : MonoBehaviour
 
     private void generateNumber()
     {
-        while (spawnedNumbers.Count < 3)
+        while (spawnedNumbers.Count < 2)
         {
-            int sign = Random.Range(0, 2);
-            if (sign == 0)//plus
-            {
-                int newNumber;
-                if (digitsToSpawn == 1)
-                {
-                    newNumber = Random.Range(1, 10);
-                }
-                else
-                    newNumber = Random.Range((int)Mathf.Pow(10, digitsToSpawn - 1), (int)Mathf.Pow(10, digitsToSpawn));
-                spawnedNumbers.Add(newNumber);
-            }
-            else
-            {
-                int newNumber;
-                if (digitsToSpawn == 1)
-                {
-                    newNumber = -Random.Range(1, 10);
-                }
-                else
-                    newNumber = -Random.Range((int)Mathf.Pow(10, digitsToSpawn - 1), (int)Mathf.Pow(10, digitsToSpawn));
-                spawnedNumbers.Add(newNumber);
-            }
+            generateRandomNumber();
         }
 
         if (hasSolveableCustomer())
         {
-            int sign = Random.Range(0, 2);
-            if (sign == 0)//plus
-            {
-                int newNumber;
-                if (digitsToSpawn == 1)
-                {
-                    newNumber = Random.Range(1, 10);
-                }
-                else
-                    newNumber = Random.Range((int)Mathf.Pow(10, digitsToSpawn - 1), (int)Mathf.Pow(10, digitsToSpawn));
-                spawnedNumbers.Add(newNumber);
-            }
-            else
-            {
-                int newNumber;
-                if (digitsToSpawn == 1)
-                {
-                    newNumber = -Random.Range(1, 10);
-                }
-                else
-                    newNumber = -Random.Range((int)Mathf.Pow(10, digitsToSpawn - 1), (int)Mathf.Pow(10, digitsToSpawn));
-                spawnedNumbers.Add(newNumber);
-            }
+            generateRandomNumber();
         }
         else
         {
+            int rng = Random.Range(0, 3);//number of additional noise numbers
             int answer = getAnswerToRandomCustomer();
             if (answer != 0)
-                spawnedNumbers.Add(answer);
-            else
             {
-                int sign = Random.Range(0, 2);
-                if (sign == 0)//plus
+                if (rng > 0)
                 {
-                    int newNumber;
-                    if (digitsToSpawn == 1)
+                    int position = Random.Range(0, 3); //position of answer with the new noise numbers
+                    if (position == 2)
                     {
-                        newNumber = Random.Range(1, 10);
+                        generateRandomNumber();
+                        if (rng == 2)
+                            generateRandomNumber();
                     }
-                    else
-                        newNumber = Random.Range((int)Mathf.Pow(10, digitsToSpawn - 1), (int)Mathf.Pow(10, digitsToSpawn));
-                    spawnedNumbers.Add(newNumber);
+                    else if (position == 1 && rng == 2)
+                        generateRandomNumber();
+                    spawnedNumbers.Add(answer);
+                    if (position == 1)
+                        generateRandomNumber();
+                    else if (position == 0)
+                    {
+                        generateRandomNumber();
+                        if (rng == 2)
+                            generateRandomNumber();
+                    }
                 }
                 else
-                {
-                    int newNumber;
-                    if (digitsToSpawn == 1)
-                    {
-                        newNumber = -Random.Range(1, 10);
-                    }
-                    else
-                        newNumber = -Random.Range((int)Mathf.Pow(10, digitsToSpawn - 1), (int)Mathf.Pow(10, digitsToSpawn));
-                    spawnedNumbers.Add(newNumber);
-                }
+                    spawnedNumbers.Add(answer);
+            }
+            else
+            {
+                generateRandomNumber();
             }
         }
     }
 
+    private void generateRandomNumber()
+    {
+        int sign = Random.Range(0, 2);
+        if (sign == 0)//plus
+        {
+            int newNumber;
+            if (digitsToSpawn == 1)
+            {
+                newNumber = Random.Range(1, 10);
+            }
+            else
+                newNumber = Random.Range((int)Mathf.Pow(10, digitsToSpawn - 1), (int)Mathf.Pow(10, digitsToSpawn));
+            spawnedNumbers.Add(newNumber);
+        }
+        else
+        {
+            int newNumber;
+            if (digitsToSpawn == 1)
+            {
+                newNumber = -Random.Range(1, 10);
+            }
+            else
+                newNumber = -Random.Range((int)Mathf.Pow(10, digitsToSpawn - 1), (int)Mathf.Pow(10, digitsToSpawn));
+            spawnedNumbers.Add(newNumber);
+        }
+    }
     private int getAnswerToRandomCustomer()
     {
         int answer = 0;
