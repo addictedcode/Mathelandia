@@ -12,7 +12,7 @@ public class ConveyorBelt : MonoBehaviour
     private int maximumSpawnedNumbers = 10;
     private List<int> spawnedNumbers = new List<int>();
 
-    private List<CustomerOrder> customerOrders = new List<CustomerOrder>();
+    public CustomerSpawner customerSpawner;
 
     // Update is called once per frame
     void Update()
@@ -39,15 +39,12 @@ public class ConveyorBelt : MonoBehaviour
         {
             for (int j = i + 1; j < spawnedNumbers.Count; j++)
             {
-                for (int k = 0; k < customerOrders.Count; k++)
-                {
-                    if (spawnedNumbers[i] + spawnedNumbers[j] == customerOrders[k].getOrder())
-                        return true;
-                    else if (spawnedNumbers[i] - spawnedNumbers[j] == customerOrders[k].getOrder())
-                        return true;
-                    else if (spawnedNumbers[j] - spawnedNumbers[i] == customerOrders[k].getOrder())
-                        return true;
-                }
+                if (spawnedNumbers[i] + spawnedNumbers[j] == customerSpawner.getFirstCustomerOrder())
+                    return true;
+                else if (spawnedNumbers[i] - spawnedNumbers[j] == customerSpawner.getFirstCustomerOrder())
+                    return true;
+                else if (spawnedNumbers[j] - spawnedNumbers[i] == customerSpawner.getFirstCustomerOrder())
+                    return true;
             }
         }
         return false;
@@ -131,10 +128,10 @@ public class ConveyorBelt : MonoBehaviour
     {
         int answer = 0;
 
-        for (int i = 0; i < customerOrders.Count; i++)
+        for (int i = 0; i < spawnedNumbers.Count; i++)
         {
-            int chosenOrder = customerOrders[i].getOrder();
-            int chosenNumber = spawnedNumbers[Random.Range(0, spawnedNumbers.Count)];
+            int chosenOrder = customerSpawner.getFirstCustomerOrder();
+            int chosenNumber = spawnedNumbers[i];
 
             int sign = Random.Range(0, 2);
             if (sign == 0)//plus
@@ -241,10 +238,5 @@ public class ConveyorBelt : MonoBehaviour
         }
 
         return answer;
-    }
-
-    public void addCustomer(CustomerOrder order)
-    {
-        customerOrders.Add(order);
     }
 }
