@@ -27,6 +27,8 @@ public class playerController : MonoBehaviour
     [SerializeField]
     private SpriteRenderer heldItemSprite = null;
 
+    [SerializeField]
+    private NumberCandles numberCandleSpawner;
     #endregion
 
     #region Fields
@@ -40,10 +42,6 @@ public class playerController : MonoBehaviour
 
     //INTERACTING ===========================
     public bool isTrashCan;
-    public bool isCustomer;
-    public Customer customerRef;
-    public GameObject tempCake;
-
     public bool isInsideInteractField = false;
     public InteractableBehavior interactable = null;
     //INTERACTING ===========================
@@ -123,17 +121,8 @@ public class playerController : MonoBehaviour
                 if (isTrashCan)
                 {
                     UpdateHeldItem(null, null, new Color(0, 0, 0, 0));
+                    GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
                     animator.SetBool("isHolding", false);
-                }
-                else if (isCustomer)
-                {
-                    Cake cake = heldItem.GetComponent<Cake>();
-                    if (customerRef.finishOrder(cake.getNumber()))
-                    {
-                        Debug.Log("success");
-                        UpdateHeldItem(null, null, new Color(0, 0, 0, 0));
-                        animator.SetBool("isHolding", false);
-                    }
                 }
             }
             
@@ -141,10 +130,19 @@ public class playerController : MonoBehaviour
             {
                 if(interactable != null)
                 {
+                    GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
                     UpdateHeldItem(interactable.pickUpItem,
                                     interactable.pickUpItem.GetComponentInChildren<SpriteRenderer>().sprite,
                                     interactable.pickUpItem.GetComponentInChildren<SpriteRenderer>().color);
                     animator.SetBool("isHolding", true);
+                    if(interactable.gameObject.tag == "CakeBase")
+                    {
+                        GetComponentInChildren<CandleSpriteHandler>().toggleSprites(true);
+                        GetComponentInChildren<CandleSpriteHandler>().updateCandleSprites(
+                                    numberCandleSpawner.generateCandleSprites(
+                                           interactable.pickUpItem.GetComponent<HeldObject>().cakeInteger));
+                        Destroy(interactable.gameObject);
+                    }
                 }
             }
         }
