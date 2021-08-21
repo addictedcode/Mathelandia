@@ -6,7 +6,7 @@ public class Customer : MonoBehaviour
 {
     private int order;
     public CustomerSpawner spawner;
-    
+
     public void setOrder(int num)
     {
         order = num;
@@ -23,7 +23,7 @@ public class Customer : MonoBehaviour
         if (cakeNum == order)
         {
             spawner.clearCustomer(this);
-            Destroy(this);
+            Destroy(this.gameObject);
             return true;
         }
         else

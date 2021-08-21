@@ -42,7 +42,7 @@ public class playerController : MonoBehaviour
     public bool isTrashCan;
     public bool isCustomer;
     public Customer customerRef;
-    
+    public GameObject tempCake;
 
     public bool isInsideInteractField = false;
     public InteractableBehavior interactable = null;
@@ -130,6 +130,7 @@ public class playerController : MonoBehaviour
                     Cake cake = heldItem.GetComponent<Cake>();
                     if (customerRef.finishOrder(cake.getNumber()))
                     {
+                        Debug.Log("success");
                         UpdateHeldItem(null, null, new Color(0, 0, 0, 0));
                         animator.SetBool("isHolding", false);
                     }

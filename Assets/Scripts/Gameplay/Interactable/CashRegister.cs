@@ -9,9 +9,12 @@ public class CashRegister : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<playerController>().isCustomer = true;
-            other.gameObject.GetComponent<playerController>().customerRef = customerSpawner.getFirstCustomer();
-            other.gameObject.GetComponent<playerController>().isInsideInteractField = true;
+            if (customerSpawner.isCustomerPresent())
+            {
+                other.gameObject.GetComponent<playerController>().isCustomer = true;
+                other.gameObject.GetComponent<playerController>().customerRef = customerSpawner.getFirstCustomer();
+                other.gameObject.GetComponent<playerController>().isInsideInteractField = true;
+            }
         }
     }
 

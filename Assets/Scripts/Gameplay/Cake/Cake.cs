@@ -10,7 +10,7 @@ public class Cake : MonoBehaviour
         Subtraction = 1
     }
 
-    private int number;
+    public int number;
     private List<int> components;
     private List<operations> operationList;
 

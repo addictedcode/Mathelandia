@@ -19,7 +19,7 @@ public class ConveyorBelt : MonoBehaviour
     {
         timeSinceLastNumber += Time.deltaTime;
 
-        if (spawnedNumbers.Count < maximumSpawnedNumbers)
+        if (spawnedNumbers.Count < maximumSpawnedNumbers && customerSpawner.isCustomerPresent())
         {
             if (timeSinceLastNumber >= numberSpawnInterval)
             {
