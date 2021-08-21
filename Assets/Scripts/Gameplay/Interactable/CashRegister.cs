@@ -11,8 +11,6 @@ public class CashRegister : MonoBehaviour
         {
             if (customerSpawner.isCustomerPresent())
             {
-                other.gameObject.GetComponent<playerController>().isCustomer = true;
-                other.gameObject.GetComponent<playerController>().customerRef = customerSpawner.getFirstCustomer();
                 other.gameObject.GetComponent<playerController>().isInsideInteractField = true;
             }
         }
@@ -22,8 +20,6 @@ public class CashRegister : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<playerController>().isCustomer = false;
-            other.gameObject.GetComponent<playerController>().customerRef = null;
             other.gameObject.GetComponent<playerController>().isInsideInteractField = false;
         }
     }
