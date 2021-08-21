@@ -6,6 +6,7 @@ public class InteractableBehavior : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject pickUpItem;
+
     void Start()
     {
     }

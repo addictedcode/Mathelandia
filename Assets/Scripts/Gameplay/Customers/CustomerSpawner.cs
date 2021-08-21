@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class CustomerSpawner : MonoBehaviour
 {
+    public GameObject prefab;
     public int minimumOrder = 5;
     public int maximumOrder = 100;
 
     public float customerSpawnInterval = 5.0f;
     private float timeSinceLastSpawn = 0.0f;
 
-    public ConveyorBelt belt;
+    private List<Customer> currentCustomers = new List<Customer>();
 
     // Update is called once per frame
     void Update()
@@ -18,11 +19,33 @@ public class CustomerSpawner : MonoBehaviour
         timeSinceLastSpawn += Time.deltaTime;
         if (timeSinceLastSpawn >= customerSpawnInterval)
         {
-            CustomerOrder customer = new CustomerOrder();
+            GameObject gameObject = Instantiate(prefab);
+            Customer customer = gameObject.GetComponent<Customer>();
             int order = Random.Range(minimumOrder, maximumOrder);
             customer.setOrder(order);
-            belt.addCustomer(customer);
+            customer.spawner = this;
+            currentCustomers.Add(customer);
             timeSinceLastSpawn -= customerSpawnInterval;
         }
+    }
+
+    public int getFirstCustomerOrder()
+    {
+        return currentCustomers[0].getOrder();
+    }
+    
+    public Customer getFirstCustomer()
+    {
+        return currentCustomers[0];
+    }
+
+    public void clearCustomer(Customer customer)
+    {
+        currentCustomers.Remove(customer);
+    }
+
+    public bool isCustomerPresent()
+    {
+        return currentCustomers.Count > 0;
     }
 }

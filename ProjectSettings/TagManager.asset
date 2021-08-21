@@ -14,6 +14,7 @@ TagManager:
   - 
   - Water
   - UI
+  - PauseMenu
   - 
   - 
   - 
@@ -38,9 +39,11 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - PostProcess
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 214594947
     locked: 0

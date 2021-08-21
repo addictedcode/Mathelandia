@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/_bootloader.unity
     guid: e55834a5389312344bbb82abde913b98
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 3db28275e56c82a44ba0d5eb593c04c7
+  - enabled: 1
     path: Assets/Scenes/GameplayUIScene.unity
     guid: 6c922adaf726b494ab0510518cfe1b70
+  - enabled: 1
+    path: Assets/Scenes/Audio.unity
+    guid: 812d1a3daa8557b47a74c390908d8ed1
   m_configObjects: {}

@@ -29,7 +29,6 @@ public class playerController : MonoBehaviour
 
     [SerializeField]
     private NumberCandles numberCandleSpawner;
-
     #endregion
 
     #region Fields
@@ -43,10 +42,6 @@ public class playerController : MonoBehaviour
 
     //INTERACTING ===========================
     public bool isTrashCan;
-    
-    
-    
-
     public bool isInsideInteractField = false;
     public InteractableBehavior interactable = null;
     //INTERACTING ===========================

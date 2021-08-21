@@ -1,40 +1,40 @@
 fileFormatVersion: 2
-guid: 1bbae60b4f0d911478b9425eeaa11146
+guid: 55d453078bd6526449ab525412d90d17
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4252207737470138954
-    second: ui_coin_0
+      213: -5368410737279887902
+    second: ui_clock_0
   - first:
-      213: 5934906067794671901
-    second: ui_coin_1
+      213: -3182085839756306247
+    second: ui_clock_1
   - first:
-      213: -2403637485803952163
-    second: ui_coin_2
+      213: 3506106183455104611
+    second: ui_clock_2
   - first:
-      213: 166027772355151773
-    second: ui_coin_3
+      213: 7567809444291171776
+    second: ui_clock_3
   - first:
-      213: 3940351756001063577
-    second: ui_coin_4
+      213: 1553498030552085310
+    second: ui_clock_4
   - first:
-      213: 3039433299480350537
-    second: ui_coin_5
+      213: -9080590484401640530
+    second: ui_clock_5
   - first:
-      213: -4728265587240538200
-    second: ui_coin_6
+      213: 8025767654761184804
+    second: ui_clock_6
   - first:
-      213: -5491795991222978175
-    second: ui_coin_7
+      213: -6379741176367578065
+    second: ui_clock_7
   - first:
-      213: 7461900185519009598
-    second: ui_coin_8
+      213: -8148826262248846189
+    second: ui_clock_8
   - first:
-      213: 1031902360435177482
-    second: ui_coin_9
+      213: 499588349992644874
+    second: ui_clock_9
   - first:
-      213: 7621307413190946859
-    second: ui_coin_10
+      213: 345730591924941644
+    second: ui_clock_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -79,7 +79,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
@@ -124,7 +124,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ui_coin_0
+      name: ui_clock_0
       rect:
         serializedVersion: 2
         x: 0
@@ -138,14 +138,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4a33177860e20b30800000000000000
-      internalID: 4252207737470138954
+      spriteID: 2e51a04a0e29f75b0800000000000000
+      internalID: -5368410737279887902
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_coin_1
+      name: ui_clock_1
       rect:
         serializedVersion: 2
         x: 32
@@ -159,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d19363acf950d5250800000000000000
-      internalID: 5934906067794671901
+      spriteID: 9b85684c9c5f6d3d0800000000000000
+      internalID: -3182085839756306247
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_coin_2
+      name: ui_clock_2
       rect:
         serializedVersion: 2
         x: 64
@@ -180,14 +180,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd7a7d1117094aed0800000000000000
-      internalID: -2403637485803952163
+      spriteID: 36e54a96ff038a030800000000000000
+      internalID: 3506106183455104611
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_coin_3
+      name: ui_clock_3
       rect:
         serializedVersion: 2
         x: 96
@@ -201,14 +201,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d97041a1169dd4200800000000000000
-      internalID: 166027772355151773
+      spriteID: 0c552d6f792460960800000000000000
+      internalID: 7567809444291171776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_coin_4
+      name: ui_clock_4
       rect:
         serializedVersion: 2
         x: 128
@@ -222,14 +222,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 992b7829b01fea630800000000000000
-      internalID: 3940351756001063577
+      spriteID: e33735e5a322f8510800000000000000
+      internalID: 1553498030552085310
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_coin_5
+      name: ui_clock_5
       rect:
         serializedVersion: 2
         x: 160
@@ -243,14 +243,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94f05067b7c3e2a20800000000000000
-      internalID: 3039433299480350537
+      spriteID: eaba272c0134bf180800000000000000
+      internalID: -9080590484401640530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_coin_6
+      name: ui_clock_6
       rect:
         serializedVersion: 2
         x: 192
@@ -264,14 +264,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8afe2d4ff73d16eb0800000000000000
-      internalID: -4728265587240538200
+      spriteID: 42e3cdfd821416f60800000000000000
+      internalID: 8025767654761184804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_coin_7
+      name: ui_clock_7
       rect:
         serializedVersion: 2
         x: 224
@@ -285,14 +285,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1897d3c84a839c3b0800000000000000
-      internalID: -5491795991222978175
+      spriteID: f248daf833b9677a0800000000000000
+      internalID: -6379741176367578065
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_coin_8
+      name: ui_clock_8
       rect:
         serializedVersion: 2
         x: 256
@@ -306,14 +306,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3f28431faefd8760800000000000000
-      internalID: 7461900185519009598
+      spriteID: 39c884650bd89ee80800000000000000
+      internalID: -8148826262248846189
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_coin_9
+      name: ui_clock_9
       rect:
         serializedVersion: 2
         x: 288
@@ -327,14 +327,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0830a4cabd025e00800000000000000
-      internalID: 1031902360435177482
+      spriteID: a013c3715f4eee600800000000000000
+      internalID: 499588349992644874
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_coin_10
+      name: ui_clock_10
       rect:
         serializedVersion: 2
         x: 320
@@ -348,8 +348,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b203c4f76b254c960800000000000000
-      internalID: 7621307413190946859
+      spriteID: c43fbaf34284cc400800000000000000
+      internalID: 345730591924941644
       vertices: []
       indices: 
       edges: []
