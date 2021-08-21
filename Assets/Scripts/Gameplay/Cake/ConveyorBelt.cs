@@ -9,7 +9,7 @@ public class ConveyorBelt : MonoBehaviour
     public float numberSpawnInterval = 2.0f;
     private float timeSinceLastNumber = 0.0f;
 
-    private int maximumSpawnedNumbers = 8;
+    private int maximumSpawnedNumbers = 1;
     private List<int> spawnedNumbers = new List<int>();
 
     private List<CustomerOrder> customerOrders = new List<CustomerOrder>();
@@ -18,7 +18,6 @@ public class ConveyorBelt : MonoBehaviour
     void Update()
     {
         timeSinceLastNumber += Time.deltaTime;
-
         if (spawnedNumbers.Count < maximumSpawnedNumbers)
         {
             if (timeSinceLastNumber >= numberSpawnInterval)
@@ -27,7 +26,7 @@ public class ConveyorBelt : MonoBehaviour
                 timeSinceLastNumber -= numberSpawnInterval;
                 for (int i = 0; i < spawnedNumbers.Count; i++)
                 {
-                    Debug.Log("Number " + i + ": " + spawnedNumbers[i]);
+                    //Debug.Log("Number " + i + ": " + spawnedNumbers[i]);
                 }
             }
         }

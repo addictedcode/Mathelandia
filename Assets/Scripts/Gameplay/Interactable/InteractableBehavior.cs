@@ -6,8 +6,6 @@ public class InteractableBehavior : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject pickUpItem;
-    
-
     void Start()
     {
     }
@@ -25,7 +23,6 @@ public class InteractableBehavior : MonoBehaviour
             playerController pc = other.gameObject.GetComponent<playerController>();
             pc.isInsideInteractField = true;
             pc.interactable = this;
-            Debug.Log(1);
         }
     }
 

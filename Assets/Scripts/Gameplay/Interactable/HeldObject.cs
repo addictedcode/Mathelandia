@@ -9,5 +9,4 @@ public class HeldObject : MonoBehaviour
     public bool isPositiveFrosting = false;
     public bool isCakeBase = false;
     public int cakeInteger = 0;
-
 }

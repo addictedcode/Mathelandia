@@ -27,6 +27,9 @@ public class playerController : MonoBehaviour
     [SerializeField]
     private SpriteRenderer heldItemSprite = null;
 
+    [SerializeField]
+    private NumberCandles numberCandleSpawner;
+
     #endregion
 
     #region Fields
@@ -123,6 +126,7 @@ public class playerController : MonoBehaviour
                 if (isTrashCan)
                 {
                     UpdateHeldItem(null, null, new Color(0, 0, 0, 0));
+                    GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
                     animator.SetBool("isHolding", false);
                 }
             }
@@ -131,10 +135,19 @@ public class playerController : MonoBehaviour
             {
                 if(interactable != null)
                 {
+                    GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
                     UpdateHeldItem(interactable.pickUpItem,
                                     interactable.pickUpItem.GetComponentInChildren<SpriteRenderer>().sprite,
                                     interactable.pickUpItem.GetComponentInChildren<SpriteRenderer>().color);
                     animator.SetBool("isHolding", true);
+                    if(interactable.gameObject.tag == "CakeBase")
+                    {
+                        GetComponentInChildren<CandleSpriteHandler>().toggleSprites(true);
+                        GetComponentInChildren<CandleSpriteHandler>().updateCandleSprites(
+                                    numberCandleSpawner.generateCandleSprites(
+                                           interactable.pickUpItem.GetComponent<HeldObject>().cakeInteger));
+                        Destroy(interactable.gameObject);
+                    }
                 }
             }
         }
