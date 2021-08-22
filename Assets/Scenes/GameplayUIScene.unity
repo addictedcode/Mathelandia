@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 61569864}
   - component: {fileID: 61569863}
   - component: {fileID: 61569862}
-  m_Layer: 6
+  m_Layer: 30
   m_Name: Continue Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 80163608}
   - component: {fileID: 80163610}
   - component: {fileID: 80163609}
-  m_Layer: 5
+  m_Layer: 29
   m_Name: Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 533987373}
-  m_Layer: 5
+  - component: {fileID: 533987374}
+  m_Layer: 29
   m_Name: Coins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,6 +416,18 @@ RectTransform:
   m_AnchoredPosition: {x: -175, y: -110}
   m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &533987374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533987372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80933eabf0753d9428f23b4572ea3d62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &604268146
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +439,7 @@ GameObject:
   - component: {fileID: 604268149}
   - component: {fileID: 604268147}
   - component: {fileID: 604268148}
-  m_Layer: 6
+  m_Layer: 30
   m_Name: Pause Camera
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 08a04b12dd0d5ec4da08f074806d5bf7, type: 3}
@@ -464,7 +477,7 @@ Camera:
   m_Depth: 100
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1073741888
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -525,7 +538,7 @@ GameObject:
   m_Component:
   - component: {fileID: 692145243}
   - component: {fileID: 692145242}
-  m_Layer: 6
+  m_Layer: 30
   m_Name: ui_pausemenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +623,7 @@ GameObject:
   - component: {fileID: 1058428836}
   - component: {fileID: 1058428838}
   - component: {fileID: 1058428837}
-  m_Layer: 6
+  m_Layer: 30
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -744,7 +757,7 @@ GameObject:
   - component: {fileID: 1195916572}
   - component: {fileID: 1195916574}
   - component: {fileID: 1195916573}
-  m_Layer: 5
+  m_Layer: 29
   m_Name: ui_coin_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -848,8 +861,8 @@ GameObject:
   - component: {fileID: 1200792035}
   - component: {fileID: 1200792036}
   - component: {fileID: 1200792038}
-  m_Layer: 31
-  m_Name: Main Camera
+  m_Layer: 29
+  m_Name: HUD Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -886,7 +899,7 @@ Camera:
   m_Depth: 99
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 536870912
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1009,7 +1022,7 @@ GameObject:
   - component: {fileID: 1204997413}
   - component: {fileID: 1204997412}
   - component: {fileID: 1204997411}
-  m_Layer: 5
+  m_Layer: 29
   m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1110,7 +1123,7 @@ GameObject:
   - component: {fileID: 1241426406}
   - component: {fileID: 1241426405}
   - component: {fileID: 1241426404}
-  m_Layer: 6
+  m_Layer: 30
   m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1212,7 +1225,7 @@ GameObject:
   - component: {fileID: 1298237934}
   - component: {fileID: 1298237933}
   - component: {fileID: 1298237932}
-  m_Layer: 6
+  m_Layer: 30
   m_Name: Quit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1380,7 +1393,7 @@ GameObject:
   - component: {fileID: 1911787949}
   - component: {fileID: 1911787951}
   - component: {fileID: 1911787950}
-  m_Layer: 6
+  m_Layer: 30
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1580,7 +1593,7 @@ GameObject:
   - component: {fileID: 2032565696}
   - component: {fileID: 2032565698}
   - component: {fileID: 2032565697}
-  m_Layer: 5
+  m_Layer: 29
   m_Name: Clock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
