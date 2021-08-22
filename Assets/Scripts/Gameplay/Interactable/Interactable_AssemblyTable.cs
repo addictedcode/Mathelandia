@@ -94,7 +94,7 @@ public class Interactable_AssemblyTable : MonoBehaviour
         }
     }
 
-    public void TakeCake()
+    public int TakeCake()
     {
         if (isCakeComplete)
         {
@@ -109,7 +109,9 @@ public class Interactable_AssemblyTable : MonoBehaviour
                 sprite.color = new Color(0, 0, 0, 0);
             }
             isCakeComplete = false;
+            return FinalAnswer;
         }
+        return 0;
 
     }
 

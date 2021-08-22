@@ -21,14 +21,20 @@ public class playerController : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rb = null;
 
+    // HELD ITEMS ======================================
     [SerializeField]
-    private GameObject heldItem;
+    private GameObject heldItem;  
+    [SerializeField]
+    private GameObject heldFinishedCake;
 
     [SerializeField]
     private SpriteRenderer heldItemSprite = null;
 
     [SerializeField]
     private NumberCandles numberCandleSpawner;
+
+    public List<SpriteRenderer> cakeSprites;
+    public List<SpriteRenderer> frostingSprites;
     #endregion
 
     #region Fields
@@ -44,9 +50,15 @@ public class playerController : MonoBehaviour
     public bool isTrashCan = false;
     public bool isAssemblyTable = false;
     public bool isInsideInteractField = false;
+    public bool isHoldingFinishedCake = false;
+
+    public bool isCustomer;
+    public Customer customerRef;
+
     public InteractableBehavior interactable = null;
     public Interactable_AssemblyTable assemblyTable = null;
     //INTERACTING ===========================
+
 
     #endregion
 
@@ -56,6 +68,7 @@ public class playerController : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         heldItem = null;
+        heldFinishedCake.SetActive(false);
     }
 
     // Update is called once per frame
@@ -83,6 +96,9 @@ public class playerController : MonoBehaviour
                 spriteRenderer.flipX = false;
                 heldItemSprite.transform.localPosition = new Vector3(.5f,
                                                                    heldItemSprite.transform.localPosition.y,
+                                                                   heldItemSprite.transform.localPosition.z); 
+                heldFinishedCake.transform.localPosition = new Vector3(1.27f,
+                                                                   heldItemSprite.transform.localPosition.y,
                                                                    heldItemSprite.transform.localPosition.z);
             }
 
@@ -90,6 +106,9 @@ public class playerController : MonoBehaviour
             {
                 spriteRenderer.flipX = true;
                 heldItemSprite.transform.localPosition = new Vector3(-.5f,
+                                                                   heldItemSprite.transform.localPosition.y,
+                                                                   heldItemSprite.transform.localPosition.z);
+                heldFinishedCake.transform.localPosition = new Vector3(-1.27f,
                                                                    heldItemSprite.transform.localPosition.y,
                                                                    heldItemSprite.transform.localPosition.z);
             }
@@ -126,6 +145,18 @@ public class playerController : MonoBehaviour
                     GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
                     animator.SetBool("isHolding", false);
                 }
+                else if (isCustomer)
+                {
+                    Cake cake = heldItem.GetComponent<Cake>();
+                    if (customerRef.finishOrder(cake.getNumber()))
+                    {
+                        Debug.Log("success");
+                        UpdateHeldItem(null, null, new Color(0, 0, 0, 0));
+                        animator.SetBool("isHolding", false);
+                        isHoldingFinishedCake = false;
+                        heldFinishedCake.SetActive(false);
+                    }
+                }
                 if (isAssemblyTable)
                 {
                     if (!assemblyTable.isCakeComplete)
@@ -147,9 +178,7 @@ public class playerController : MonoBehaviour
                             animator.SetBool("isHolding", false);
                         }
                     }
-                    
                 }
-
             }
             else if (heldItemSprite.sprite == null) // IF THERE ARE NO HELD ITEMS and player is about to pick up a new item
             {
@@ -169,9 +198,35 @@ public class playerController : MonoBehaviour
                         Destroy(interactable.gameObject);
                     }
                 }
-                if (isAssemblyTable)
+
+                if (isAssemblyTable && !isHoldingFinishedCake)
                 {
-                    assemblyTable.TakeCake();
+                    if (assemblyTable.isCakeComplete)
+                    {
+                        isHoldingFinishedCake = true;
+                        UpdateHeldItemFinishedCake(assemblyTable.frostingSprites, assemblyTable.cakeSprites);
+                        int answer = assemblyTable.TakeCake();
+                        animator.SetBool("isHolding", true);
+
+                        heldFinishedCake.GetComponentInChildren<CandleSpriteHandler>().toggleSprites(true);
+                        heldFinishedCake.GetComponentInChildren<CandleSpriteHandler>().updateCandleSprites(
+                                    numberCandleSpawner.generateCandleSprites(
+                                           answer));
+                    }
+                   
+
+                    //Cake cake = heldItem.GetComponent<Cake>();
+                    //cake.setNumber(answer);
+                }
+            }
+            if (heldFinishedCake.activeSelf)
+            {
+                if (isTrashCan)
+                {
+                    isHoldingFinishedCake = false;
+                    heldFinishedCake.SetActive(false);
+                    heldFinishedCake.GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
+                    animator.SetBool("isHolding", false);
                 }
             }
         }
@@ -182,5 +237,18 @@ public class playerController : MonoBehaviour
         heldItem = newHeldItem;
         heldItemSprite.sprite = newSprite;
         heldItemSprite.color = newColor;
+    }
+
+    private void UpdateHeldItemFinishedCake(List<SpriteRenderer> newFrostings, List<SpriteRenderer> newCakeBases)
+    {
+        heldFinishedCake.SetActive(true);   
+        for(int i = 0; i < newFrostings.Count; i++)
+        {
+            frostingSprites[i].color = newFrostings[i].color;
+        }
+        for(int i = 0; i < newCakeBases.Count; i++)
+        {
+            cakeSprites[i].color = newCakeBases[i].color;
+        }
     }
 }
