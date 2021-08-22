@@ -35,18 +35,22 @@ public class ConveyorBelt : MonoBehaviour
 
     private bool hasSolveableCustomer()
     {
-        for (int i = 0; i < spawnedNumbers.Count - 1; i++)
+        if (customerSpawner.isCustomerPresent())
         {
-            for (int j = i + 1; j < spawnedNumbers.Count; j++)
+            for (int i = 0; i < spawnedNumbers.Count - 1; i++)
             {
-                if (spawnedNumbers[i] + spawnedNumbers[j] == customerSpawner.getFirstCustomerOrder())
-                    return true;
-                else if (spawnedNumbers[i] - spawnedNumbers[j] == customerSpawner.getFirstCustomerOrder())
-                    return true;
-                else if (spawnedNumbers[j] - spawnedNumbers[i] == customerSpawner.getFirstCustomerOrder())
-                    return true;
+                for (int j = i + 1; j < spawnedNumbers.Count; j++)
+                {
+                    if (spawnedNumbers[i] + spawnedNumbers[j] == customerSpawner.getFirstCustomerOrder())
+                        return true;
+                    else if (spawnedNumbers[i] - spawnedNumbers[j] == customerSpawner.getFirstCustomerOrder())
+                        return true;
+                    else if (spawnedNumbers[j] - spawnedNumbers[i] == customerSpawner.getFirstCustomerOrder())
+                        return true;
+                }
             }
         }
+        
         return false;
     }
 
@@ -127,21 +131,69 @@ public class ConveyorBelt : MonoBehaviour
     private int getAnswerToRandomCustomer()
     {
         int answer = 0;
-
-        for (int i = 0; i < spawnedNumbers.Count; i++)
+        if (customerSpawner.isCustomerPresent())
         {
-            int chosenOrder = customerSpawner.getFirstCustomerOrder();
-            int chosenNumber = spawnedNumbers[i];
-
-            int sign = Random.Range(0, 2);
-            if (sign == 0)//plus
+            for (int i = 0; i < spawnedNumbers.Count; i++)
             {
-                if (chosenNumber < chosenOrder)
+                int chosenOrder = customerSpawner.getFirstCustomerOrder();
+                int chosenNumber = spawnedNumbers[i];
+
+                int sign = Random.Range(0, 2);
+                if (sign == 0)//plus
                 {
-                    int trialAnswer = chosenOrder - chosenNumber;
+                    if (chosenNumber < chosenOrder)
+                    {
+                        int trialAnswer = chosenOrder - chosenNumber;
+                        if (digitsToSpawn == 1)
+                        {
+                            if (trialAnswer < 10 && trialAnswer >= 1)
+                            {
+                                answer = trialAnswer;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (trialAnswer < Mathf.Pow(10, digitsToSpawn) && trialAnswer >= Mathf.Pow(10, digitsToSpawn - 1))
+                            {
+                                answer = trialAnswer;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        int trialAnswer = chosenOrder - chosenNumber;
+                        if (digitsToSpawn == 1)
+                        {
+                            if (trialAnswer > -10 && trialAnswer <= -1)
+                            {
+                                answer = trialAnswer;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (trialAnswer > -Mathf.Pow(10, digitsToSpawn) && trialAnswer <= -Mathf.Pow(10, digitsToSpawn - 1))
+                            {
+                                answer = trialAnswer;
+                                break;
+                            }
+                        }
+                    }
+                    sign = 1;
+                }
+                if (sign == 1)
+                {
+                    int trialAnswer = chosenOrder + chosenNumber;
                     if (digitsToSpawn == 1)
                     {
                         if (trialAnswer < 10 && trialAnswer >= 1)
+                        {
+                            answer = trialAnswer;
+                            break;
+                        }
+                        else if (trialAnswer > -10 && trialAnswer <= -1)
                         {
                             answer = trialAnswer;
                             break;
@@ -154,14 +206,21 @@ public class ConveyorBelt : MonoBehaviour
                             answer = trialAnswer;
                             break;
                         }
+                        else if (trialAnswer > -Mathf.Pow(10, digitsToSpawn) && trialAnswer <= -Mathf.Pow(10, digitsToSpawn - 1))
+                        {
+                            answer = trialAnswer;
+                            break;
+                        }
                     }
-                }
-                else
-                {
-                    int trialAnswer = chosenOrder - chosenNumber;
+                    trialAnswer = chosenNumber - chosenOrder;
                     if (digitsToSpawn == 1)
                     {
-                        if (trialAnswer > -10 && trialAnswer <= -1)
+                        if (trialAnswer < 10 && trialAnswer >= 1)
+                        {
+                            answer = trialAnswer;
+                            break;
+                        }
+                        else if (trialAnswer > -10 && trialAnswer <= -1)
                         {
                             answer = trialAnswer;
                             break;
@@ -169,69 +228,16 @@ public class ConveyorBelt : MonoBehaviour
                     }
                     else
                     {
-                        if (trialAnswer > -Mathf.Pow(10, digitsToSpawn) && trialAnswer <= -Mathf.Pow(10, digitsToSpawn - 1))
+                        if (trialAnswer < Mathf.Pow(10, digitsToSpawn) && trialAnswer >= Mathf.Pow(10, digitsToSpawn - 1))
                         {
                             answer = trialAnswer;
                             break;
                         }
-                    }
-                }
-                sign = 1;
-            }
-            if (sign == 1)
-            {
-                int trialAnswer = chosenOrder + chosenNumber;
-                if (digitsToSpawn == 1)
-                {
-                    if (trialAnswer < 10 && trialAnswer >= 1)
-                    {
-                        answer = trialAnswer;
-                        break;
-                    }
-                    else if (trialAnswer > -10 && trialAnswer <= -1)
-                    {
-                        answer = trialAnswer;
-                        break;
-                    }
-                }
-                else
-                {
-                    if (trialAnswer < Mathf.Pow(10, digitsToSpawn) && trialAnswer >= Mathf.Pow(10, digitsToSpawn - 1))
-                    {
-                        answer = trialAnswer;
-                        break;
-                    }
-                    else if (trialAnswer > -Mathf.Pow(10, digitsToSpawn) && trialAnswer <= -Mathf.Pow(10, digitsToSpawn - 1))
-                    {
-                        answer = trialAnswer;
-                        break;
-                    }
-                }
-                trialAnswer = chosenNumber - chosenOrder;
-                if (digitsToSpawn == 1)
-                {
-                    if (trialAnswer < 10 && trialAnswer >= 1)
-                    {
-                        answer = trialAnswer;
-                        break;
-                    }
-                    else if (trialAnswer > -10 && trialAnswer <= -1)
-                    {
-                        answer = trialAnswer;
-                        break;
-                    }
-                }
-                else
-                {
-                    if (trialAnswer < Mathf.Pow(10, digitsToSpawn) && trialAnswer >= Mathf.Pow(10, digitsToSpawn - 1))
-                    {
-                        answer = trialAnswer;
-                        break;
-                    }
-                    else if (trialAnswer > -Mathf.Pow(10, digitsToSpawn) && trialAnswer <= -Mathf.Pow(10, digitsToSpawn - 1))
-                    {
-                        answer = trialAnswer;
-                        break;
+                        else if (trialAnswer > -Mathf.Pow(10, digitsToSpawn) && trialAnswer <= -Mathf.Pow(10, digitsToSpawn - 1))
+                        {
+                            answer = trialAnswer;
+                            break;
+                        }
                     }
                 }
             }
