@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CustomerSpawner : MonoBehaviour
 {
-    public GameObject prefab;
+    public GameObject[] prefabs;
     public int minimumOrder = 5;
     public int maximumOrder = 100;
 
@@ -23,7 +23,7 @@ public class CustomerSpawner : MonoBehaviour
         timeSinceLastSpawn += Time.deltaTime;
         if (timeSinceLastSpawn >= customerSpawnInterval && currentCustomers.Count < maxCustomers)
         {
-            GameObject gameObject = Instantiate(prefab);
+            GameObject gameObject = Instantiate(prefabs[Random.Range(0,prefabs.Length)]);
             Customer customer = gameObject.GetComponent<Customer>();
 
             int order = Random.Range(minimumOrder, maximumOrder);
