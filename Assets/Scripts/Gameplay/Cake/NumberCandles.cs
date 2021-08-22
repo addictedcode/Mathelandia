@@ -36,7 +36,6 @@ public class NumberCandles : MonoBehaviour
             candleList.Add(negativeCandleSprite);
         }
         int[] numbersBackwards = new int[digits];
-        Debug.Log("Answer Cake: " + number + "|" + digits);
         for (int i = 0; i < digits; i++)
         {
             

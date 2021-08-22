@@ -9,8 +9,9 @@ public class ConveyorBelt : MonoBehaviour
     public float numberSpawnInterval = 2.0f;
     private float timeSinceLastNumber = 0.0f;
 
-    private int maximumSpawnedNumbers = 1;
+    private int maximumSpawnedNumbers = 4;
     private List<int> spawnedNumbers = new List<int>();
+    //private List<int> spawnedCakes = new List<int>();
 
     public CustomerSpawner customerSpawner;
 
@@ -24,11 +25,10 @@ public class ConveyorBelt : MonoBehaviour
             if (timeSinceLastNumber >= numberSpawnInterval)
             {
                 generateNumber();
+                
+
                 timeSinceLastNumber -= numberSpawnInterval;
-                for (int i = 0; i < spawnedNumbers.Count; i++)
-                {
-                    //Debug.Log("Number " + i + ": " + spawnedNumbers[i]);
-                }
+                
             }
         }
     }
@@ -83,6 +83,7 @@ public class ConveyorBelt : MonoBehaviour
                     else if (position == 1 && rng == 2)
                         generateRandomNumber();
                     spawnedNumbers.Add(answer);
+                    GetComponent<CakeSpawner>().Spawn(answer);
                     if (position == 1)
                         generateRandomNumber();
                     else if (position == 0)
@@ -93,7 +94,10 @@ public class ConveyorBelt : MonoBehaviour
                     }
                 }
                 else
+                {
                     spawnedNumbers.Add(answer);
+                    GetComponent<CakeSpawner>().Spawn(answer);
+                }
             }
             else
             {
@@ -115,6 +119,7 @@ public class ConveyorBelt : MonoBehaviour
             else
                 newNumber = Random.Range((int)Mathf.Pow(10, digitsToSpawn - 1), (int)Mathf.Pow(10, digitsToSpawn));
             spawnedNumbers.Add(newNumber);
+            GetComponent<CakeSpawner>().Spawn(newNumber);
         }
         else
         {
@@ -126,6 +131,7 @@ public class ConveyorBelt : MonoBehaviour
             else
                 newNumber = -Random.Range((int)Mathf.Pow(10, digitsToSpawn - 1), (int)Mathf.Pow(10, digitsToSpawn));
             spawnedNumbers.Add(newNumber);
+            GetComponent<CakeSpawner>().Spawn(newNumber);
         }
     }
     private int getAnswerToRandomCustomer()
@@ -244,5 +250,10 @@ public class ConveyorBelt : MonoBehaviour
         }
 
         return answer;
+    }
+
+    public void removeFromSpawnedNumbers(int num)
+    {
+        spawnedNumbers.Remove(num);
     }
 }

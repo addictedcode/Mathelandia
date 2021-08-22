@@ -6,6 +6,7 @@ public class Interactable_AssemblyTable : MonoBehaviour
 {
     // Start is called before the first frame update
     public List<GameObject> cakeBases;
+    public List<int> cakeInts;
     public List<GameObject> frostings;
     public List<SpriteRenderer> cakeSprites;
     public List<SpriteRenderer> frostingSprites;
@@ -31,7 +32,6 @@ public class Interactable_AssemblyTable : MonoBehaviour
             other.gameObject.GetComponent<playerController>().isInsideInteractField = true;
             other.gameObject.GetComponent<playerController>().isAssemblyTable = true;
             other.gameObject.GetComponent<playerController>().assemblyTable = this;
-            Debug.Log(1);
         }
     }
 
@@ -63,7 +63,9 @@ public class Interactable_AssemblyTable : MonoBehaviour
             }
             else if (newStackItem.tag == "CakeBase")
             {
+                cakeInts.Add(newStackItem.GetComponent<Cake>().number);
                 cakeBases.Add(newStackItem);
+                
                 cakeSprites[cakeBases.Count - 1].color = new Color(135f / 255f, 72f / 255f, 72f / 255f, 1f);
             }
         }
@@ -75,18 +77,18 @@ public class Interactable_AssemblyTable : MonoBehaviour
         if (frostings.Count == 1 && cakeBases.Count == 2)
         {
             isCakeComplete = true;
-            FinalAnswer = cakeBases[0].GetComponent<HeldObject>().cakeInteger;
+            FinalAnswer = cakeInts[0];
             for (int i = 1; i < cakeBases.Count; i++)
             {
                 for (int j = 0; j < frostings.Count; j++)
                 {
                     if (frostings[j].GetComponent<HeldObject>().isPositiveFrosting)
                     {
-                        FinalAnswer += cakeBases[i].GetComponent<HeldObject>().cakeInteger;
+                        FinalAnswer += cakeInts[i];
                     }
                     else
                     {
-                        FinalAnswer -= cakeBases[i].GetComponent<HeldObject>().cakeInteger;
+                        FinalAnswer -= cakeInts[i];
                     }
                 }
             }
@@ -109,6 +111,7 @@ public class Interactable_AssemblyTable : MonoBehaviour
                 sprite.color = new Color(0, 0, 0, 0);
             }
             isCakeComplete = false;
+            cakeInts.Clear();
             return FinalAnswer;
         }
         return 0;
