@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2241137782404320939}
   m_Layer: 0
   m_Name: Candle2
-  m_TagString: Untagged
+  m_TagString: CakeBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1311571055801775104}
   m_Layer: 0
   m_Name: CandlesHolder
-  m_TagString: Untagged
+  m_TagString: CakeBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 401659487456322008}
   m_Layer: 0
   m_Name: Candle1
-  m_TagString: Untagged
+  m_TagString: CakeBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 8553270833320234158}
   m_Layer: 0
   m_Name: Candle3
-  m_TagString: Untagged
+  m_TagString: CakeBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 4062652824344739657}
   m_Layer: 0
   m_Name: Candle4
-  m_TagString: Untagged
+  m_TagString: CakeBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 7134720814869027042}
   m_Layer: 0
   m_Name: CakeBase
-  m_TagString: Untagged
+  m_TagString: CakeBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -10,7 +10,7 @@ public class Customer : MonoBehaviour
     public void setOrder(int num)
     {
         order = num;
-        Debug.Log(num);
+        //Debug.Log(num);
     }
 
     public int getOrder()

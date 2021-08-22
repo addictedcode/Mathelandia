@@ -41,9 +41,11 @@ public class playerController : MonoBehaviour
     //Controls -=============================
 
     //INTERACTING ===========================
-    public bool isTrashCan;
+    public bool isTrashCan = false;
+    public bool isAssemblyTable = false;
     public bool isInsideInteractField = false;
     public InteractableBehavior interactable = null;
+    public Interactable_AssemblyTable assemblyTable = null;
     //INTERACTING ===========================
 
     #endregion
@@ -124,9 +126,32 @@ public class playerController : MonoBehaviour
                     GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
                     animator.SetBool("isHolding", false);
                 }
+                if (isAssemblyTable)
+                {
+                    if (!assemblyTable.isCakeComplete)
+                    {
+                        if (heldItem.tag == "Frosting" && assemblyTable.frostings.Count < 1)
+                        {
+                            assemblyTable.UpdateStack(heldItem);
+
+                            UpdateHeldItem(null, null, new Color(0, 0, 0, 0));
+                            GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
+                            animator.SetBool("isHolding", false);
+                        }
+                        else if (heldItem.tag == "CakeBase" && assemblyTable.cakeBases.Count < 2)
+                        {
+                            assemblyTable.UpdateStack(heldItem);
+
+                            UpdateHeldItem(null, null, new Color(0, 0, 0, 0));
+                            GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
+                            animator.SetBool("isHolding", false);
+                        }
+                    }
+                    
+                }
+
             }
-            
-            if (heldItemSprite.sprite == null) // IF THERE ARE NO HELD ITEMS and player is about to pick up a new item
+            else if (heldItemSprite.sprite == null) // IF THERE ARE NO HELD ITEMS and player is about to pick up a new item
             {
                 if(interactable != null)
                 {
@@ -143,6 +168,10 @@ public class playerController : MonoBehaviour
                                            interactable.pickUpItem.GetComponent<HeldObject>().cakeInteger));
                         Destroy(interactable.gameObject);
                     }
+                }
+                if (isAssemblyTable)
+                {
+                    assemblyTable.TakeCake();
                 }
             }
         }
