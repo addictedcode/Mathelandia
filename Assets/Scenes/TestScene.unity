@@ -1398,7 +1398,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1186354061}
   - component: {fileID: 1186354060}
-  - component: {fileID: 1186354059}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1406,14 +1405,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1186354059
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186354058}
-  m_Enabled: 1
 --- !u!20 &1186354060
 Camera:
   m_ObjectHideFlags: 0
@@ -1690,7 +1681,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f6745f63586732846a4e492864c9c940, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff358367e554a094183983bc754e1879, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1698,7 +1689,7 @@ SpriteRenderer:
   m_Size: {x: 1.92, y: 0.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1338117101
@@ -1709,7 +1700,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1338117099}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.035, y: 0.013333401, z: -10}
+  m_LocalPosition: {x: -1.035, y: 0.013333401, z: -1.15}
   m_LocalScale: {x: 2.68, y: 1.1966667, z: 1}
   m_Children: []
   m_Father: {fileID: 794489434}
@@ -4325,7 +4316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5236647633993837906, guid: 9162e3f4961b5fc4fb4e953e88c22c47, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.890731
+      value: -2.08
       objectReference: {fileID: 0}
     - target: {fileID: 5236647633993837906, guid: 9162e3f4961b5fc4fb4e953e88c22c47, type: 3}
       propertyPath: m_LocalRotation.w
