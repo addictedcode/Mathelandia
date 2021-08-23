@@ -387,8 +387,9 @@ MonoBehaviour:
   prefab_button: {fileID: 3122411737123035686, guid: dc91d5e961870cd47b97175bc1d0fdd1, type: 3}
   stageselect_panel: {fileID: 819630320}
   m_scene_stages:
-  - TestScene
-  - TutorialScene
+  - Tutorial
+  - Two Digits Level
+  - Three Digits Level
   m_scenes_to_load:
   - GameplayUIScene
 --- !u!1 &819630319

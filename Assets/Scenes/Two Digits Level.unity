@@ -763,7 +763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2183f1e362e6af246bf1d6830520efdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digitsToSpawn: 3
+  digitsToSpawn: 2
   numberSpawnInterval: 2
   customerSpawner: {fileID: 2009453522}
 --- !u!114 &794489437
@@ -3912,8 +3912,8 @@ MonoBehaviour:
   - {fileID: 2656518815870121695, guid: 2aa85708a8d4e4c4fbbe4184d8b12fcf, type: 3}
   - {fileID: 8381205121930884773, guid: b6be94f127b363a48937a9460f97116c, type: 3}
   - {fileID: 3321030576766058137, guid: 8244e08712911e44ab143463a9a1950c, type: 3}
-  minimumOrder: 5
-  maximumOrder: 999
+  minimumOrder: 1
+  maximumOrder: 99
   customerSpawnInterval: 5
   maxCustomers: 5
   lineStart: {fileID: 848907831}
