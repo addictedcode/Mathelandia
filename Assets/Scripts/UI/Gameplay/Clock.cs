@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Clock : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class Clock : MonoBehaviour
             if (m_time >= m_sprites.Length)
             {
                 EventManager<EventArgs>.Invoke(this, "endtime");
+                SceneManager.LoadScene(0);
                 break;
             }
         }
