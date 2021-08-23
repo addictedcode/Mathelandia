@@ -10,6 +10,11 @@ public class MoneyUI : MonoBehaviour
         EventManager<PointsEventArgs>.Add("points", OnPointEvent);
     }
 
+    private void OnDestroy()
+    {
+        EventManager<PointsEventArgs>.Remove("points", OnPointEvent);
+    }
+
     void OnPointEvent(object sender, PointsEventArgs e)
     {
         TMP_Text text = gameObject.GetComponentInChildren<TMP_Text>();
