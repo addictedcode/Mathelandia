@@ -17,6 +17,7 @@ public class CustomerSpawner : MonoBehaviour
     public GameObject lineStart;
     public GameObject lineEnd;
 
+
     // Update is called once per frame
     void Update()
     {

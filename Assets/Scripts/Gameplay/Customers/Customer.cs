@@ -12,13 +12,14 @@ public class Customer : MonoBehaviour
     private Vector3 destination;
     private Vector3 startPosition;
     private float lerpDelta = 0.0f;
+    public Animator animator;
 
     private bool hasNewDestination = false;
 
     public void setOrder(int num)
     {
         order = num;
-        Debug.Log(num);
+        //Debug.Log(num);
     }
 
     public int getOrder()
@@ -49,8 +50,11 @@ public class Customer : MonoBehaviour
 
             gameObject.transform.position = Vector3.Lerp(startPosition, destination, lerpDelta);
 
-            if (lerpDelta.Equals(1.0f))
+            animator.SetFloat("speed", 1);
+
+            if (lerpDelta >= 1.0f)
             {
+                animator.SetFloat("speed", 0);
                 if (leavingShop)
                     Destroy(gameObject);
                 else

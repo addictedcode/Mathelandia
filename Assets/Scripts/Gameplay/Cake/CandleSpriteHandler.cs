@@ -6,16 +6,7 @@ public class CandleSpriteHandler : MonoBehaviour
 {
     // Start is called before the first frame update
     public SpriteRenderer[] candleSprites;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private int digits;
 
     public void updateCandleSprites(List<Sprite> newCandleSprites)
     {
@@ -23,12 +14,18 @@ public class CandleSpriteHandler : MonoBehaviour
         {
             candleSprites[i].sprite = newCandleSprites[i];
         }
+        digits = newCandleSprites.Count;
+        toggleSprites(true);
     }
     public void toggleSprites(bool toggle)
     {
-        for (int i = 0; i < candleSprites.Length; i++)
+        for (int i = 0; i < digits; i++)
         {
             candleSprites[i].gameObject.SetActive(toggle);
+        }
+        for (int i = digits; i < 4; i++)
+        {
+            candleSprites[i].gameObject.SetActive(false);
         }
     }
 

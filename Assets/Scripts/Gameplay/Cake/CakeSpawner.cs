@@ -20,10 +20,9 @@ public class CakeSpawner : MonoBehaviour
     public int maxSpawn = 4;
     public int currentSpawned = 0;
 
-    void Start()
-    {
-        
-    }
+    public List<int> spawnedCakes = new List<int>();
+
+    
 
     // Update is called once per frame
     void Update()
@@ -32,17 +31,29 @@ public class CakeSpawner : MonoBehaviour
 
         if (timeSinceLastNumber >= numberSpawnInterval)
         {
-            if(currentSpawned < maxSpawn)
+            Debug.Log(spawnedCakes.Count);
+            if (currentSpawned < maxSpawn && spawnedCakes.Count > 0)
             {
                 GameObject cake = Instantiate(cakeInteractablePrefab, spawnPoint.position, Quaternion.identity);
                 //conveyorBelt.spawned // get number from conveyor belt here
+
                 cake.GetComponentInChildren<CandleSpriteHandler>().updateCandleSprites(
-                                                    numberCandleSpawner.generateCandleSprites(-123));
+                                                    numberCandleSpawner.generateCandleSprites(spawnedCakes[0]));
                 cake.GetComponent<Rigidbody2D>().AddForce(new Vector3(-500f, 0f));
-                cake.GetComponent<InteractableBehavior>().pickUpItem.GetComponent<HeldObject>().cakeInteger = -123;
-                timeSinceLastNumber -= numberSpawnInterval;
+                int x = spawnedCakes[0];
+                cake.GetComponent<InteractableBehavior>().pickUpItem.GetComponent<HeldObject>().cakeInteger = x;
+
+                cake.GetComponent<Cake>().number = x;
+                timeSinceLastNumber = 0;
                 currentSpawned++;
+                spawnedCakes.RemoveAt(0);
             }
         }
+    }
+
+    public void Spawn(int num)
+    {
+        spawnedCakes.Add(num);
+        
     }
 }

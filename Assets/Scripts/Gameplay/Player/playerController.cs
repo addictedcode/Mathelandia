@@ -21,14 +21,25 @@ public class playerController : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rb = null;
 
+    // HELD ITEMS ======================================
     [SerializeField]
-    private GameObject heldItem;
+    private GameObject heldItem;  
+    [SerializeField]
+    private GameObject heldFinishedCake;
 
     [SerializeField]
     private SpriteRenderer heldItemSprite = null;
 
     [SerializeField]
     private NumberCandles numberCandleSpawner;
+
+    [SerializeField]
+    private ConveyorBelt conveyorBelt;
+    [SerializeField]
+    private CakeSpawner cakeSpawner;
+
+    public List<SpriteRenderer> cakeSprites;
+    public List<SpriteRenderer> frostingSprites;
     #endregion
 
     #region Fields
@@ -41,10 +52,18 @@ public class playerController : MonoBehaviour
     //Controls -=============================
 
     //INTERACTING ===========================
-    public bool isTrashCan;
+    public bool isTrashCan = false;
+    public bool isAssemblyTable = false;
     public bool isInsideInteractField = false;
+    public bool isHoldingFinishedCake = false;
+
+    public bool isCustomer;
+    public Customer customerRef;
+
     public InteractableBehavior interactable = null;
+    public Interactable_AssemblyTable assemblyTable = null;
     //INTERACTING ===========================
+
 
     #endregion
 
@@ -54,6 +73,7 @@ public class playerController : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         heldItem = null;
+        heldFinishedCake.SetActive(false);
     }
 
     // Update is called once per frame
@@ -81,6 +101,9 @@ public class playerController : MonoBehaviour
                 spriteRenderer.flipX = false;
                 heldItemSprite.transform.localPosition = new Vector3(.5f,
                                                                    heldItemSprite.transform.localPosition.y,
+                                                                   heldItemSprite.transform.localPosition.z); 
+                heldFinishedCake.transform.localPosition = new Vector3(1.27f,
+                                                                   heldItemSprite.transform.localPosition.y,
                                                                    heldItemSprite.transform.localPosition.z);
             }
 
@@ -88,6 +111,9 @@ public class playerController : MonoBehaviour
             {
                 spriteRenderer.flipX = true;
                 heldItemSprite.transform.localPosition = new Vector3(-.5f,
+                                                                   heldItemSprite.transform.localPosition.y,
+                                                                   heldItemSprite.transform.localPosition.z);
+                heldFinishedCake.transform.localPosition = new Vector3(-1.27f,
                                                                    heldItemSprite.transform.localPosition.y,
                                                                    heldItemSprite.transform.localPosition.z);
             }
@@ -124,24 +150,112 @@ public class playerController : MonoBehaviour
                     GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
                     animator.SetBool("isHolding", false);
                 }
+                if (isAssemblyTable)
+                {
+                    if (!assemblyTable.isCakeComplete)
+                    {
+                        if (heldItem.tag == "Frosting" && assemblyTable.frostings.Count < 1)
+                        {
+                            assemblyTable.UpdateStack(heldItem);
+
+                            UpdateHeldItem(null, null, new Color(0, 0, 0, 0));
+                            GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
+                            animator.SetBool("isHolding", false);
+                        }
+                        else if (heldItem.tag == "CakeBase" && assemblyTable.cakeBases.Count < 2)
+                        {
+                            assemblyTable.UpdateStack(heldItem);
+
+                            UpdateHeldItem(null, null, new Color(0, 0, 0, 0));
+                            GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
+                            animator.SetBool("isHolding", false);
+                        }
+                    }
+                }
             }
-            
-            if (heldItemSprite.sprite == null) // IF THERE ARE NO HELD ITEMS and player is about to pick up a new item
+            else if (heldItemSprite.sprite == null) // IF THERE ARE NO HELD ITEMS and player is about to pick up a new item
             {
                 if(interactable != null)
                 {
                     GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
+                    
                     UpdateHeldItem(interactable.pickUpItem,
                                     interactable.pickUpItem.GetComponentInChildren<SpriteRenderer>().sprite,
                                     interactable.pickUpItem.GetComponentInChildren<SpriteRenderer>().color);
+
                     animator.SetBool("isHolding", true);
-                    if(interactable.gameObject.tag == "CakeBase")
+
+                    if(interactable.gameObject.tag == "CakeBase") // picking up a cake
                     {
-                        GetComponentInChildren<CandleSpriteHandler>().toggleSprites(true);
                         GetComponentInChildren<CandleSpriteHandler>().updateCandleSprites(
                                     numberCandleSpawner.generateCandleSprites(
-                                           interactable.pickUpItem.GetComponent<HeldObject>().cakeInteger));
+                                           interactable.GetComponent<Cake>().number));
+
+
+                        interactable.pickUpItem.GetComponent<Cake>().number = interactable.GetComponent<Cake>().number;
+                        Debug.Log(interactable.GetComponent<Cake>().number);
+
+                        UpdateHeldItem(interactable.pickUpItem,
+                                    interactable.pickUpItem.GetComponentInChildren<SpriteRenderer>().sprite,
+                                    interactable.pickUpItem.GetComponentInChildren<SpriteRenderer>().color);
+
+                        conveyorBelt.removeFromSpawnedNumbers(interactable.GetComponent<Cake>().number);
+                        cakeSpawner.currentSpawned--;
+                        
                         Destroy(interactable.gameObject);
+                    }
+                }
+
+                if (isAssemblyTable && !isHoldingFinishedCake)
+                {
+                    if (assemblyTable.isCakeComplete)
+                    {
+                        isHoldingFinishedCake = true;
+                        UpdateHeldItemFinishedCake(assemblyTable.frostingSprites, assemblyTable.cakeSprites);
+                        int answer = assemblyTable.TakeCake();
+                        animator.SetBool("isHolding", true);
+
+                        heldFinishedCake.GetComponentInChildren<CandleSpriteHandler>().toggleSprites(true);
+                        heldFinishedCake.GetComponentInChildren<CandleSpriteHandler>().updateCandleSprites(
+                                    numberCandleSpawner.generateCandleSprites(
+                                           answer));
+                        heldFinishedCake.GetComponent<Cake>().number = answer;
+                    }
+                   
+
+                    //Cake cake = heldItem.GetComponent<Cake>();
+                    //cake.setNumber(answer);
+                }
+            }
+            if (heldFinishedCake.activeSelf)
+            {
+                if (isTrashCan)
+                {
+                    isHoldingFinishedCake = false;
+                    heldFinishedCake.SetActive(false);
+                    heldFinishedCake.GetComponentInChildren<CandleSpriteHandler>().toggleSprites(false);
+                    animator.SetBool("isHolding", false);
+                }
+                if (isCustomer && isHoldingFinishedCake)
+                {
+                    Debug.Log("bruh");
+                    Cake cake = heldFinishedCake.GetComponent<Cake>();
+                    if (customerRef.finishOrder(cake.getNumber()))
+                    {
+                        Debug.Log("success");
+                        //UpdateHeldItem(null, null, new Color(0, 0, 0, 0));
+                        animator.SetBool("isHolding", false);
+                        isHoldingFinishedCake = false;
+                        heldFinishedCake.SetActive(false);
+
+                        for (int i = 0; i < frostingSprites.Count; i++)
+                        {
+                            frostingSprites[i].color = Color.clear;
+                        }
+                        for (int i = 0; i < cakeSprites.Count; i++)
+                        {
+                            cakeSprites[i].color = Color.clear;
+                        }
                     }
                 }
             }
@@ -153,5 +267,23 @@ public class playerController : MonoBehaviour
         heldItem = newHeldItem;
         heldItemSprite.sprite = newSprite;
         heldItemSprite.color = newColor;
+    }
+
+    private void UpdateHeldItemFinishedCake(List<SpriteRenderer> newFrostings, List<SpriteRenderer> newCakeBases)
+    {
+        heldFinishedCake.SetActive(true);   
+        for(int i = 0; i < newFrostings.Count; i++)
+        {
+            frostingSprites[i].color = newFrostings[i].color;
+        }
+        for(int i = 0; i < newCakeBases.Count; i++)
+        {
+            cakeSprites[i].color = newCakeBases[i].color;
+        }
+    }
+
+    public void ServeCake()
+    {
+
     }
 }

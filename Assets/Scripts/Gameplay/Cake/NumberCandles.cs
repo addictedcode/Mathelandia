@@ -28,7 +28,6 @@ public class NumberCandles : MonoBehaviour
     public List<Sprite> generateCandleSprites(int number)
     {
         int digits = Mathf.Abs(number).ToString().Length;
-        Debug.Log(digits);
         List<Sprite> candleList = new List<Sprite>();
         int[] numbers = new int[digits];
 
@@ -39,7 +38,7 @@ public class NumberCandles : MonoBehaviour
         int[] numbersBackwards = new int[digits];
         for (int i = 0; i < digits; i++)
         {
-            Debug.Log(number % 10);
+            
             numbersBackwards[i] = Mathf.Abs(number % 10);
             number /= 10;
         }
