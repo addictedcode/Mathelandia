@@ -13,6 +13,8 @@ public class Interactable_AssemblyTable : MonoBehaviour
     public int FinalAnswer = 0;
     public bool isCakeComplete = false;
 
+    public AssemblerUI equationUI;
+
     private void Start()
     {
         foreach(SpriteRenderer sprite in cakeSprites)
@@ -74,6 +76,8 @@ public class Interactable_AssemblyTable : MonoBehaviour
 
     public void UpdateFinalAnswer()
     {
+        equationUI.Activate();
+        equationUI.UpdateEquation(cakeInts, frostings);
         if (frostings.Count == 1 && cakeBases.Count == 2)
         {
             isCakeComplete = true;
@@ -112,6 +116,7 @@ public class Interactable_AssemblyTable : MonoBehaviour
             }
             isCakeComplete = false;
             cakeInts.Clear();
+            equationUI.Deactivate();
             return FinalAnswer;
         }
         return 0;
