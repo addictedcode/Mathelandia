@@ -1,8 +1,8 @@
 {
-    "name": "GameplayUI",
+    "name": "MenuUI",
     "rootNamespace": "",
     "references": [
-        "GUID:6df9b7d49ad1dbe4b8da67366dd4e338",
+        "GUID:65d2b126495ef0b4aacb2dfca9b8032f",
         "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],

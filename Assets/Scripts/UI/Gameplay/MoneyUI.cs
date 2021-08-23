@@ -1,18 +1,19 @@
 using System;
 using UnityEngine;
+using TMPro;
 
 public class MoneyUI : MonoBehaviour
 {
     // Start is called before the first frame update
     void Awake()
     {
-        EventManager<EventArgs>.Add("points", OnPointEvent);
-        EventManager<EventArgs>.Invoke(this, "points");
+        EventManager<PointsEventArgs>.Add("points", OnPointEvent);
     }
 
-    void OnPointEvent(object sender, EventArgs e)
+    void OnPointEvent(object sender, PointsEventArgs e)
     {
-        Debug.Log("Points changed");
+        TMP_Text text = gameObject.GetComponentInChildren<TMP_Text>();
+        text.text = e.points.ToString();
     }
 
 }

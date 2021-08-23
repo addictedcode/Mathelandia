@@ -26,11 +26,17 @@ public static class EventManager<T> where T : EventArgs
 
     public static void Invoke(object sender, string key)
     {
-        events[key]?.Invoke(sender, null);
+        if (events.ContainsKey(key))
+        {
+            events[key]?.Invoke(sender, null);
+        }
     }
 
     public static void Invoke(object sender, string key, T args)
     {
-        events[key]?.Invoke(sender, args);
+        if (events.ContainsKey(key))
+        {
+            events[key]?.Invoke(sender, args);
+        }
     }
 }
