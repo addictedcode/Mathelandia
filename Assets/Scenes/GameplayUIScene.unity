@@ -1809,7 +1809,7 @@ MonoBehaviour:
   - {fileID: -8148826262248846189, guid: 55d453078bd6526449ab525412d90d17, type: 3}
   - {fileID: 499588349992644874, guid: 55d453078bd6526449ab525412d90d17, type: 3}
   - {fileID: 345730591924941644, guid: 55d453078bd6526449ab525412d90d17, type: 3}
-  m_seconds: 2
+  m_seconds: 10.9
 --- !u!212 &2032565698
 SpriteRenderer:
   m_ObjectHideFlags: 0
