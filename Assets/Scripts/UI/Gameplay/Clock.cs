@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Clock : MonoBehaviour
@@ -27,7 +27,12 @@ public class Clock : MonoBehaviour
             m_renderer.sprite = m_sprites[m_time];
             yield return m_interval;
             ++m_time;
-            if (m_time >= m_sprites.Length) m_time = 0;
+            //Timer ends
+            if (m_time >= m_sprites.Length)
+            {
+                EventManager<EventArgs>.Invoke(this, "endtime");
+                break;
+            }
         }
     }
 }
