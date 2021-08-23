@@ -4,6 +4,7 @@ using TMPro;
 
 public class MoneyUI : MonoBehaviour
 {
+    private uint totalPoints = 0;
     // Start is called before the first frame update
     void Awake()
     {
@@ -13,7 +14,8 @@ public class MoneyUI : MonoBehaviour
     void OnPointEvent(object sender, PointsEventArgs e)
     {
         TMP_Text text = gameObject.GetComponentInChildren<TMP_Text>();
-        text.text = e.points.ToString();
+        totalPoints += e.points;
+        text.text = totalPoints.ToString();
     }
 
 }
