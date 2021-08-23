@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Customer : MonoBehaviour
 {
     private int order;
@@ -31,6 +31,9 @@ public class Customer : MonoBehaviour
     {
         if (cakeNum == order)
         {
+            PointsEventArgs args = new PointsEventArgs();
+            args.points = 100;
+            EventManager<PointsEventArgs>.Invoke(this, "points", args);
             spawner.clearCustomer(this);
             leavingShop = true;
             setDestination(gameObject.transform.position + new Vector3(-10, 0, 0));
