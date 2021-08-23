@@ -2,7 +2,8 @@
     "name": "MenuUI",
     "rootNamespace": "",
     "references": [
-        "GUID:65d2b126495ef0b4aacb2dfca9b8032f"
+        "GUID:65d2b126495ef0b4aacb2dfca9b8032f",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
